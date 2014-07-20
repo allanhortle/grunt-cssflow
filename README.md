@@ -37,53 +37,59 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.preprocessor
 Type: `String`
-Default value: `',  '`
+Default value: `sass`
 
-A string value that is used to do something with whatever.
+A string value that is used to do determine the preprocessor
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### options.sass
+Type: `Object`
 
-A string value that is used to do something else with whatever else.
+Pass in any custom Sass configurations
+
+#### options.less
+Type: `Object`
+
+Pass in any custom Less configurations
+
+#### options.autoprefixer
+Type: `Object`
+
+Pass in any custom Autoprefixer configurations
+
+#### options.cssmin
+Type: `Object`
+
+Pass in any custom cssmin configurations
+
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
+#### Default Configuration
 ```js
 grunt.initConfig({
   cssflow: {
-    options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+      'css/main.css': 'less/main.scss'
+    }
+  }
 });
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
+#### Less Configuration
 ```js
 grunt.initConfig({
   cssflow: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      preprocessor: 'less',
+      autoprefixer: {
+        browsers: ['last 2 version', 'ie 8', 'ie 9']
+      }
     },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+      'css/main.css': 'less/main.less'
+    }
+  }
 });
 ```
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-_(Nothing yet)_
