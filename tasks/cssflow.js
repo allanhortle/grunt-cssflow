@@ -12,18 +12,23 @@ var _ = require('lodash');
 
 module.exports = function(grunt) {
 
-    // Please see the Grunt documentation for more information regarding task
-    // creation: http://gruntjs.com/creating-tasks
-
     var options;
+    var cwd = process.cwd();
 
+    // Loading cssflow's dir on account of grunt failing at submodule loading
+    process.chdir('node_modules/grunt-cssflow/');
+
+    // Load the tasks
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-autoprefixer');
 
+    // Back to current dir
+    process.chdir(cwd);
+
+
     grunt.registerMultiTask('cssflow', 'Combination pre-process, auto-prefix, minify.', function() {
-        // Merge task-specific and/or target-specific options with these defaults.
 
         var dests = {};
         var mins = {};
@@ -39,21 +44,25 @@ module.exports = function(grunt) {
 
 
         this.files.forEach(function(f) {
-            var src = f.src.filter(function(filepath) {
-                // Warn on and remove invalid source files (if nonull was set).
-                if (!grunt.file.exists(filepath)) {
-                    grunt.log.warn('Source file "' + filepath + '" not found.');
-                    return false;
-                } else {
-                    return true;
-                }
-            });
+            // var src = f.src.filter(function(filepath) {
+            //     // Warn on and remove invalid source files (if nonull was set).
+            //     if (!grunt.file.exists(filepath)) {
+            //         grunt.log.warn('Source file "' + filepath + '" not found.');
+            //         return false;
+            //     } else {
+            //         return true;
+            //     }
+            // });
+
+
             var suffix = f.dest.split('.').pop();
+            // add destination override
             dests[f.dest] = f.dest;
-            mins[f.dest.replace(suffix,'min.' + suffix)] = f.dest;
+            mins[f.dest.replace(new RegExp(suffix + '$'),'min.' + suffix)] = f.dest;
                      
         });
 
+        // Preprocess
         grunt.config(options.preprocessor, {
             options: options[options.preprocessor],            
             inator: {
@@ -61,6 +70,7 @@ module.exports = function(grunt) {
             }
         });
 
+        // Autoprefix
         grunt.config('autoprefixer', {
             options: options.autoprefixer,
             ing: {
@@ -68,12 +78,15 @@ module.exports = function(grunt) {
             }
         });
 
+        // Minify
         grunt.config('cssmin', {
             options: options.cssmin,
             ify: {
                 files: mins
             }
         });
+
+
 
         var prefix = options.autoprefixer.browsers || 'default';
 
