@@ -71,7 +71,7 @@ Pass in any custom cssmin configurations
 grunt.initConfig({
   cssflow: {
     files: {
-      'css/main.css': 'less/main.scss'
+      'css/main.css': 'sass/main.scss'
     }
   }
 });
