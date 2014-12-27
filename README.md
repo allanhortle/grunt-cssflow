@@ -70,8 +70,10 @@ Pass in any custom cssmin configurations
 ```js
 grunt.initConfig({
   cssflow: {
-    files: {
-      'css/main.css': 'sass/main.scss'
+    your_target: {
+      files: {
+        'css/main.css': 'sass/main.scss'
+      }
     }
   }
 });
@@ -87,8 +89,10 @@ grunt.initConfig({
         browsers: ['last 2 version', 'ie 8', 'ie 9']
       }
     },
-    files: {
-      'css/main.css': 'less/main.less'
+    your_target: {
+      files: {
+        'css/main.css': 'less/main.less'
+      }
     }
   }
 });
