@@ -95,7 +95,7 @@ module.exports = function(grunt) {
         grunt.log.writeln('=============================================='['rainbow']);
         grunt.log.ok('Pre-processor: ' + options.preprocessor);
         grunt.log.ok('Prefixing:     ' + prefix);
-        grunt.log.ok('Minfiy:        Always');
+        grunt.log.ok('Minify:        Always');
         grunt.log.writeln('=============================================='['rainbow']);
 
         grunt.task.run([options.preprocessor, 'autoprefixer', 'cssmin']);
