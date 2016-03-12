@@ -1,5 +1,8 @@
 # grunt-cssflow
 
+[![Dependency Status](https://david-dm.org/jobayerarman/grunt-cssflow.svg)](https://david-dm.org/jobayerarman/grunt-cssflow)
+[![devDependency Status](https://david-dm.org/jobayerarman/grunt-cssflow/dev-status.svg)](https://david-dm.org/jobayerarman/grunt-cssflow#info=devDependencies)
+
 > Combination pre-process, auto-prefix, minify.
 
 ## Getting Started
